@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import workoutRoutes from "./routes/workout.js";
+import workoutRoutes from "./routes/workoutRoutes.js";
 
 dotenv.config();
 
