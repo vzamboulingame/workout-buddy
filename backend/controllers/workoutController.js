@@ -60,7 +60,7 @@ export const updateWorkout = async (request, response) => {
 
 		isValidObjectId(id, response);
 
-		const updatedWorkout = await workoutModel.findByIdAndUpdate(
+		const updatedWorkout = await workoutModel.findOneAndUpdate(
 			{ _id: id }, // filter by id
 			{ ...request.body }, // update with new data
 			{ new: true }, // return updated document
@@ -79,7 +79,7 @@ export const deleteWorkout = async (request, response) => {
 
 		isValidObjectId(id, response);
 
-		const deletedWorkout = await workoutModel.deleteOne({ _id: id });
+		const deletedWorkout = await workoutModel.findOneAndDelete({ _id: id });
 
 		response.status(200).json(deletedWorkout);
 	} catch (error) {
