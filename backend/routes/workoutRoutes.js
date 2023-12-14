@@ -1,5 +1,4 @@
 import express from "express";
-import workoutModel from "../models/workoutModel.js";
 import {
 	getAllWorkouts,
 	getWorkout,
