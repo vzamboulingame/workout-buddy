@@ -1,7 +1,10 @@
+import Navbar from "../components/Navbar";
+
 export default function NotFound() {
 	return (
 		<>
-			<h1 className="text-3xl font-bold text-red-500">Page Not Found</h1>
+			<Navbar />
+			<h1 className="text-3xl font-bold px-4 py-4">Page Not Found</h1>
 		</>
 	);
 }
