@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cors from "cors";
 import workoutRoutes from "./routes/workoutRoutes.js";
 
 dotenv.config();
@@ -8,6 +9,8 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 4000;
 const mongoURI = process.env.MONGO_URI;
+
+app.use(cors());
 
 app.use(express.json());
 
