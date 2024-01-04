@@ -1,89 +1,103 @@
 import mongoose from "mongoose";
 import workoutModel from "../models/workoutModel.js";
 
-// Check if id is a valid MongoDB ObjectId
-const isValidObjectId = (id, response) => {
-	if (!mongoose.Types.ObjectId.isValid(id)) {
-		return response
-			.status(404)
-			.json({ error: "The id is not a valid MongoDB ObjectId" });
-	}
-};
-
 // GET all workouts
 export const getAllWorkouts = async (request, response) => {
-	try {
-		const allWorkouts = await workoutModel.find({}).sort({ createdAt: -1 });
+  const allWorkouts = await workoutModel.find({}).sort({ createdAt: -1 });
 
-		response.status(200).json(allWorkouts);
-	} catch (error) {
-		response.status(400).json({ error: error.message });
-	}
+  if (!allWorkouts) {
+    return response.status(400).json({ error: error.message });
+  }
+
+  response.status(200).json(allWorkouts);
 };
 
 // GET a single workout
 export const getWorkout = async (request, response) => {
-	try {
-		const { id } = request.params;
+  const { id } = request.params;
+  const isValidObjectId = mongoose.Types.ObjectId.isValid(id);
 
-		isValidObjectId(id, response);
+  if (!isValidObjectId) {
+    return response.status(404).json({ error: "Invalid MongoDB ObjectId" });
+  }
 
-		const workout = await workoutModel.findById(id);
+  const workout = await workoutModel.findById(id);
 
-		response.status(200).json(workout);
-	} catch (error) {
-		response.status(400).json({ error: error.message });
-	}
+  if (!workout) {
+    return response.status(404).json({ error: "Workout not found" });
+  }
+
+  response.status(200).json(workout);
 };
 
 // CREATE a new workout
 export const createWorkout = async (request, response) => {
-	try {
-		const { title, sets, reps, load } = request.body;
+  const { title, sets, reps, load } = request.body;
 
-		const createdWorkout = await workoutModel.create({
-			title,
-			sets,
-			reps,
-			load,
-		});
+  const createdWorkout = await workoutModel.create({
+    title,
+    sets,
+    reps,
+    load,
+  });
 
-		response.status(201).json(createdWorkout);
-	} catch (error) {
-		response.status(400).json({ error: error.message });
-	}
+  if (!createdWorkout) {
+    return response.status(400).json({ error: error.message });
+  }
+
+  response.status(201).json(createdWorkout);
 };
 
 // UPDATE a single workout
 export const updateWorkout = async (request, response) => {
-	try {
-		const { id } = request.params;
+  const { id } = request.params;
 
-		isValidObjectId(id, response);
+  const isValidObjectId = mongoose.Types.ObjectId.isValid(id);
 
-		const updatedWorkout = await workoutModel.findOneAndUpdate(
-			{ _id: id }, // filter by id
-			{ ...request.body }, // update with new data
-			{ new: true }, // return updated document
-		);
+  if (!isValidObjectId) {
+    return response.status(404).json({ error: "Invalid MongoDB ObjectId" });
+  }
 
-		response.status(200).json(updatedWorkout);
-	} catch (error) {
-		response.status(400).json({ error: error.message });
-	}
+  const isValidWorkout = await workoutModel.findById(id);
+
+  if (!isValidWorkout) {
+    return response.status(404).json({ error: "Workout not found" });
+  }
+
+  const updatedWorkout = await workoutModel.findOneAndUpdate(
+    { _id: id }, // filter by id
+    { ...request.body }, // update with new data
+    { new: true } // return updated document
+  );
+
+  if (!updatedWorkout) {
+    return response.status(400).json({ error: error.message });
+  }
+
+  response.status(200).json(updatedWorkout);
 };
 
 // DELETE a single workout
 export const deleteWorkout = async (request, response) => {
-	try {
-		const { id } = request.params;
+  const { id } = request.params;
 
-		isValidObjectId(id, response);
+  const isValidObjectId = mongoose.Types.ObjectId.isValid(id);
 
-		const deletedWorkout = await workoutModel.findOneAndDelete({ _id: id });
+  if (!isValidObjectId) {
+    return response.status(404).json({ error: "Invalid MongoDB ObjectId" });
+  }
 
-		response.status(200).json(deletedWorkout);
-	} catch (error) {
-		response.status(400).json({ error: error.message });
-	}
+  const isValidWorkout = await workoutModel.findById(id);
+
+  if (!isValidWorkout) {
+    return response.status(404).json({ error: "Workout not found" });
+  }
+
+  const deletedWorkout = await workoutModel.findOneAndDelete({ _id: id });
+
+  if (!deletedWorkout) {
+    return response.status(400).json({ error: error.message });
+  }
+
+  response.status(200).json(deletedWorkout);
 };
