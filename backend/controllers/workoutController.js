@@ -39,10 +39,11 @@ export const getWorkout = async (request, response) => {
 // CREATE a new workout
 export const createWorkout = async (request, response) => {
 	try {
-		const { title, reps, load } = request.body;
+		const { title, sets, reps, load } = request.body;
 
 		const createdWorkout = await workoutModel.create({
 			title,
+			sets,
 			reps,
 			load,
 		});
