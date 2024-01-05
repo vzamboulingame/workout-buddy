@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
-import workoutModel from "../models/workoutModel.js";
+import { workoutModel } from "../models/workoutModel.js";
 
 // GET all workouts
-export const getAllWorkouts = async (request, response) => {
+export async function getAllWorkouts(request, response) {
   const allWorkouts = await workoutModel.find({}).sort({ createdAt: -1 });
 
   if (!allWorkouts) {
@@ -10,10 +10,10 @@ export const getAllWorkouts = async (request, response) => {
   }
 
   response.status(200).json(allWorkouts);
-};
+}
 
 // GET a single workout
-export const getWorkout = async (request, response) => {
+export async function getWorkout(request, response) {
   const { id } = request.params;
   const isValidObjectId = mongoose.Types.ObjectId.isValid(id);
 
@@ -28,10 +28,10 @@ export const getWorkout = async (request, response) => {
   }
 
   response.status(200).json(workout);
-};
+}
 
 // CREATE a new workout
-export const createWorkout = async (request, response) => {
+export async function createWorkout(request, response) {
   const { title, sets, reps, load } = request.body;
 
   const createdWorkout = await workoutModel.create({
@@ -46,10 +46,10 @@ export const createWorkout = async (request, response) => {
   }
 
   response.status(201).json(createdWorkout);
-};
+}
 
 // UPDATE a single workout
-export const updateWorkout = async (request, response) => {
+export async function updateWorkout(request, response) {
   const { id } = request.params;
 
   const isValidObjectId = mongoose.Types.ObjectId.isValid(id);
@@ -75,10 +75,10 @@ export const updateWorkout = async (request, response) => {
   }
 
   response.status(200).json(updatedWorkout);
-};
+}
 
 // DELETE a single workout
-export const deleteWorkout = async (request, response) => {
+export async function deleteWorkout(request, response) {
   const { id } = request.params;
 
   const isValidObjectId = mongoose.Types.ObjectId.isValid(id);
@@ -100,4 +100,4 @@ export const deleteWorkout = async (request, response) => {
   }
 
   response.status(200).json(deletedWorkout);
-};
+}

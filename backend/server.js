@@ -15,20 +15,20 @@ app.use(cors());
 app.use(express.json());
 
 app.use((request, response, next) => {
-	console.log(request.method, request.url);
-	next();
+  console.log(request.method, request.url);
+  next();
 });
 
 app.use("/api/workouts", workoutRoutes);
 
 mongoose
-	.connect(mongoURI)
-	.then(() => {
-		console.log("Connected to MongoDB");
-		app.listen(port, () => {
-			console.log(`App listening on port ${port}`);
-		});
-	})
-	.catch((error) => {
-		console.error("Error connecting to MongoDB : ", error);
-	});
+  .connect(mongoURI)
+  .then(() => {
+    console.log("Connected to MongoDB");
+    app.listen(port, () => {
+      console.log(`App listening on port ${port}`);
+    });
+  })
+  .catch((error) => {
+    console.error("Error connecting to MongoDB : ", error);
+  });

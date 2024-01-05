@@ -2,29 +2,27 @@ import mongoose from "mongoose";
 
 // Define the schema for the workouts
 const workoutSchema = new mongoose.Schema(
-	{
-		title: {
-			type: String,
-			required: true,
-		},
-		sets: {
-			type: Number,
-			required: true,
-		},
-		reps: {
-			type: Number,
-			required: true,
-		},
-		load: {
-			type: Number,
-			required: true,
-		},
-	},
-	{
-		timestamps: true,
-	},
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    sets: {
+      type: Number,
+      required: true,
+    },
+    reps: {
+      type: Number,
+      required: true,
+    },
+    load: {
+      type: Number,
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
 );
 
-const workoutModel = mongoose.model("Workout", workoutSchema);
-
-export default workoutModel;
+export const workoutModel = mongoose.model("Workout", workoutSchema);
