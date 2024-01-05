@@ -22,7 +22,7 @@ export function Home() {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col min-h-[calc(100vh-6rem)] bg-slate-50 p-4 text-neutral-900">
+      <div className="flex flex-col min-h-[calc(100vh-6rem)] bg-slate-200 p-4 text-neutral-900">
         {workouts?.map((workout) => (
           <WorkoutDetails workout={workout} key={workout._id} />
         ))}
