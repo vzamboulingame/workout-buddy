@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import dumbbellSvg from "../images/dumbbell-gym.svg";
 
-export default function Navbar() {
+export function Navbar() {
   return (
     <nav className="flex items-center justify-between h-24 px-4 py-2 text-neutral-900">
       <Link

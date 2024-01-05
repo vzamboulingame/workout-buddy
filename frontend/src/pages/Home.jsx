@@ -1,20 +1,20 @@
 import { useState, useEffect } from "react";
 import { workoutApiUrl } from "../utils/apiUrl";
-import Navbar from "../components/Navbar";
-import WorkoutDetails from "../components/WorkoutDetails";
+import { Navbar } from "../components/Navbar";
+import { WorkoutDetails } from "../components/WorkoutDetails";
 
-export default function Home() {
+export function Home() {
   const [workouts, setWorkouts] = useState(null);
 
   useEffect(() => {
-    const fetchWorkouts = async () => {
+    async function fetchWorkouts() {
       const response = await fetch(workoutApiUrl);
       const json = await response.json();
 
       if (response.ok) {
         setWorkouts(json);
       }
-    };
+    }
 
     fetchWorkouts();
   }, []);

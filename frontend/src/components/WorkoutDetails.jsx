@@ -1,4 +1,4 @@
-export default function WorkoutDetails({ workout }) {
+export function WorkoutDetails({ workout }) {
   return (
     <>
       <div className="flex flex-col p-4 m-4 bg-white rounded">
