@@ -1,7 +1,7 @@
 export function WorkoutDetails({ workout }) {
   return (
     <>
-      <div className="flex flex-col max-w-xl p-4 m-4 bg-white shadow-sm rounded-xl">
+      <div className="flex flex-col max-w-full p-4 m-4 bg-white shadow-sm rounded-xl">
         <p className="mb-2 text-xl text-blue-900">
           <strong>{workout.title}</strong>
         </p>
