@@ -3,7 +3,7 @@ import dumbbellSvg from "../images/dumbbell-gym.svg";
 
 export function Navbar() {
   return (
-    <nav className="flex items-center justify-between h-24 px-4 py-2 text-neutral-900">
+    <nav className="flex items-center justify-between h-24 px-32 py-2 text-neutral-900">
       <Link
         className="flex items-center justify-between gap-4 transition duration-150 text-neutral-900 hover:opacity-50"
         to="/">

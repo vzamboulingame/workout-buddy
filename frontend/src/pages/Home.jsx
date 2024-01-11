@@ -23,8 +23,8 @@ export function Home() {
   return (
     <>
       <Navbar />
-      <div className="flex flex-row justify-start gap-8 min-h-[calc(100vh-6rem)] w-full bg-slate-200 p-4 text-neutral-900">
-        <div className="flex flex-col w-1/4">
+      <div className="flex flex-row justify-start gap-8 min-h-[calc(100vh-6rem)] w-full bg-slate-200 py-8 px-32 text-neutral-900">
+        <div className="flex flex-col w-5/6">
           {workouts?.map((workout) => (
             <WorkoutDetails workout={workout} key={workout._id} />
           ))}

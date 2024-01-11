@@ -36,7 +36,7 @@ export function WorkoutForm() {
   }
 
   return (
-    <form className="flex flex-col gap-2 m-4" onSubmit={handleSubmit}>
+    <form className="flex flex-col w-1/6 gap-2 m-4" onSubmit={handleSubmit}>
       <p className="mb-2 text-xl">
         <strong>Add a New Workout</strong>
       </p>
