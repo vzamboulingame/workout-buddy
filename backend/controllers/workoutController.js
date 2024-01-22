@@ -34,6 +34,26 @@ export async function getWorkout(request, response) {
 export async function createWorkout(request, response) {
   const { title, sets, reps, load } = request.body;
 
+  const emptyFields = [];
+
+  if (!title) {
+    emptyFields.push("title");
+  }
+  if (!sets) {
+    emptyFields.push("sets");
+  }
+  if (!reps) {
+    emptyFields.push("reps");
+  }
+  if (!load) {
+    emptyFields.push("load");
+  }
+  if (emptyFields.length > 0) {
+    return response
+      .status(400)
+      .json({ error: "Please fill in all fields", emptyFields });
+  }
+
   const createdWorkout = await workoutModel.create({
     title,
     sets,

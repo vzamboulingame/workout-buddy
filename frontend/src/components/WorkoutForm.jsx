@@ -10,6 +10,7 @@ export function WorkoutForm() {
   const [reps, setReps] = useState("");
   const [load, setLoad] = useState("");
   const [error, setError] = useState(null);
+  const [emptyFields, setEmptyFields] = useState([]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -27,6 +28,7 @@ export function WorkoutForm() {
     const json = await response.json();
 
     if (response.ok) {
+      setEmptyFields([]);
       setError(null);
       setTitle("");
       setSets("");
@@ -35,6 +37,7 @@ export function WorkoutForm() {
       dispatch({ type: "CREATE_WORKOUT", payload: json });
     } else {
       setError(json.error);
+      setEmptyFields(json.emptyFields);
     }
   }
 
@@ -46,7 +49,9 @@ export function WorkoutForm() {
 
       <label>Workout Title :</label>
       <input
-        className="p-1 rounded"
+        className={`p-1 rounded ${
+          emptyFields.includes("title") ? "input-error" : ""
+        }`}
         type="text"
         onChange={(e) => setTitle(e.target.value)}
         value={title}
@@ -54,7 +59,9 @@ export function WorkoutForm() {
 
       <label>Number of sets :</label>
       <input
-        className="p-1 rounded"
+        className={`p-1 rounded ${
+          emptyFields.includes("sets") ? "input-error" : ""
+        }`}
         type="number"
         onChange={(e) => setSets(e.target.value)}
         value={sets}
@@ -62,7 +69,9 @@ export function WorkoutForm() {
 
       <label>Number of reps :</label>
       <input
-        className="p-1 rounded"
+        className={`p-1 rounded ${
+          emptyFields.includes("reps") ? "input-error" : ""
+        }`}
         type="number"
         onChange={(e) => setReps(e.target.value)}
         value={reps}
@@ -70,7 +79,9 @@ export function WorkoutForm() {
 
       <label>Load (in kg) :</label>
       <input
-        className="p-1 rounded"
+        className={`p-1 rounded ${
+          emptyFields.includes("load") ? "input-error" : ""
+        }`}
         type="number"
         onChange={(e) => setLoad(e.target.value)}
         value={load}
@@ -81,7 +92,7 @@ export function WorkoutForm() {
         type="submit">
         Add Workout
       </button>
-      {error && <div className="error">{error}</div>}
+      {error && <div className="div-error">{error}</div>}
     </form>
   );
 }
